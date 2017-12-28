@@ -1,2 +1,3 @@
 # lingon-points
-Points mirco service for lingonsaft
+
+Micro service for lingonsaft points system built with Firebase and micro
