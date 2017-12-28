@@ -1,8 +1,13 @@
-const { send, createError } = require('micro')
+const {send, createError, json} = require('micro')
+const {router, post, get} = require('microrouter')
+const getPoints = require('./src/routes/get-points')
+const motifyPoints = require('./src/routes/modify-points')
 
-module.exports = async (req, res) => {
-  if (req.headers.authorization !== `Bearer ${process.env.AUTH_TOKEN}`) {
-    throw createError(403, 'Unauthorized')
-  }
-  send(res, 200, 'Hello')
-}
+const notfound = (req, res) =>
+  send(res, 404, 'Not found route')
+
+module.exports = router(
+  post('/', motifyPoints),
+  get('/', getPoints),
+  get('/*', notfound)
+)
