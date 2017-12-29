@@ -3,7 +3,7 @@ const hashString = require('../hash')
 const {emailColletionRef} = require('../firebase')
 
 const motifyPoints = async (req, res) => {
-  if (req.headers.authorization !== `Bearer ${process.env.AUTH_TOKEN}`) {
+  if (req.headers.authorization !== `Bearer ${process.env.API_TOKEN}`) {
     throw createError(403, 'Unauthorized')
   }
 
