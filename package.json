@@ -4,7 +4,7 @@
   "description": "mirco service for lingonsaft point system",
   "main": "app.js",
   "scripts": {
-    "start": "micro -p 3000",
+    "start": "micro",
     "develop": "micro-dev -p 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,14 +29,8 @@
     "micro-dev": "^2.1.1"
   },
   "now": {
-    "name": "lingon-points",
     "alias": "lingon.lingonsaft.com",
     "dotenv": true,
-    "public": false,
-    "files": [
-      "firebase.json",
-      ".env"
-    ],
     "env": {
       "NODE_ENV": "production"
     }
