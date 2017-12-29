@@ -5,8 +5,8 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 })
 const db = admin.firestore()
-const emailColletionRef = db.collection('emails')
+const inputColletionRef = db.collection('inputs')
 
 module.exports = {
-  emailColletionRef,
+  inputColletionRef,
 }
