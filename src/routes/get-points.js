@@ -1,13 +1,19 @@
-const {send} = require('micro')
-const {emailColletionRef} = require('../firebase')
+const {send, createError} = require('micro')
+const {inputColletionRef} = require('../firebase')
 const hashString = require('../hash')
+const {isValidNumber} = require('libphonenumber-js')
+const {validateEmail} = require('../validation')
 
 const getPoints = async (req, res) => {
-  const {email} = req.query
-  const emailHash = hashString(email)
+  const {input} = req.query
 
-  const emailObjectRef = emailColletionRef.doc(emailHash)
-  const doc = await emailObjectRef.get()
+  if (!isValidNumber(input) && !validateEmail(input)) {
+    throw createError(400, 'input must be of type email or phonenumber')
+  }
+
+  const inputHash = hashString(input)
+  const inputObjectRef = inputColletionRef.doc(inputHash)
+  const doc = await inputObjectRef.get()
 
   if (!doc.exists) {
     return send(res, 404, {

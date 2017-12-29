@@ -1,16 +1,23 @@
 const {send, createError, json} = require('micro')
 const hashString = require('../hash')
-const {emailColletionRef} = require('../firebase')
+const {inputColletionRef} = require('../firebase')
+const {isValidNumber} = require('libphonenumber-js')
+const {validateEmail} = require('../validation')
 
 const motifyPoints = async (req, res) => {
   if (req.headers.authorization !== `Bearer ${process.env.API_TOKEN}`) {
     throw createError(403, 'Unauthorized')
   }
 
-  const {email, lingon = 0} = await json(req)
-  const emailHash = hashString(email)
-  const emailObjectRef = emailColletionRef.doc(emailHash)
-  const doc = await emailObjectRef.get()
+  const {input, lingon = 0} = await json(req)
+
+  if (!isValidNumber(input) && !validateEmail(input)) {
+    throw createError(400, 'input must be of type email or phonenumber')
+  }
+
+  const inputHash = hashString(input)
+  const inputObjectRef = inputColletionRef.doc(inputHash)
+  const doc = await inputObjectRef.get()
 
   if (!doc.exists) {
 
@@ -18,8 +25,8 @@ const motifyPoints = async (req, res) => {
       throw createError(406, 'Points cannot be lower than 0')
     }
 
-    emailColletionRef.doc(emailHash).set({
-      emailId: emailHash,
+    inputColletionRef.doc(inputHash).set({
+      inputId: inputHash,
       lingon,
     })
 
@@ -36,7 +43,7 @@ const motifyPoints = async (req, res) => {
     throw createError(406, 'Lingon cannot be lower than 0')
   }
 
-  emailObjectRef.update({
+  inputObjectRef.update({
     lingon: totalLingon,
   })
 
