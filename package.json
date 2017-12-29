@@ -29,7 +29,7 @@
     "micro-dev": "^2.1.1"
   },
   "now": {
-    "alias": "lingon.lingonsaft.com",
+    "alias": "lingonapi.lingonsaft.com",
     "dotenv": true,
     "env": {
       "NODE_ENV": "production"
