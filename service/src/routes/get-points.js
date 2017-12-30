@@ -6,12 +6,13 @@ const {validateEmail} = require('../validation')
 
 const getPoints = async (req, res) => {
   const {input} = req.query
+  const formatedInput = input.toLowerCase()
 
-  if (!isValidNumber(input) && !validateEmail(input)) {
+  if (!isValidNumber(formatedInput) && !validateEmail(formatedInput)) {
     throw createError(400, 'input must be of type email or phonenumber')
   }
 
-  const inputHash = hashString(input)
+  const inputHash = hashString(formatedInput)
   const inputObjectRef = inputColletionRef.doc(inputHash)
   const doc = await inputObjectRef.get()
 
