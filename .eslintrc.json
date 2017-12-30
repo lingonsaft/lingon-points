@@ -52,7 +52,6 @@
     "spaced-comment": "error",
     "arrow-spacing": "error",
     "template-curly-spacing": "error",
-    "arrow-parens": ["error", "as-needed"],
     "arrow-body-style": "error",
     "no-useless-computed-key": "error",
     "no-useless-constructor": "error",
