@@ -12,6 +12,14 @@ injectGlobal`
     font-family: 'Roboto', sans-serif;
   }
 
+  body {
+    margin: 0px;
+    @media only screen
+    and (max-width: 550px) {
+      margin: 32px;
+    }
+  }
+
   #namer {
     position: relative;
   }
@@ -161,8 +169,8 @@ const StatelessApp = ({result, inputed, error, loadPoints, isLoading}) =>
     {!isLoading && (result
       ? <LingonPoints points={result} inputed={inputed}/>
       : <Input onEnter={(value) => {
-          loadPoints(value)
-        }}/>)
+        loadPoints(value)
+      }}/>)
     }
 
   </StyledContent>
