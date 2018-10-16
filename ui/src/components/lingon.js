@@ -5,9 +5,8 @@ export const LingonPoints = ({points, inputed}) => (
   <div>
     <Light>You have</Light>
     <Points>{points}</Points>
-    <Lingon>Lingon</Lingon>
+    <Lingon>Berries</Lingon>
     <Light>{inputed}</Light>
     <Bar/>
   </div>
 )
-
